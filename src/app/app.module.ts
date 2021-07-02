@@ -5,6 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import {HttpClientModule} from '@angular/common/http';
+import {StoreModule} from '@ngrx/store';
+import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,14 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot({ router: routerReducer }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
