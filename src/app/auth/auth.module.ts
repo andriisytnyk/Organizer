@@ -9,9 +9,12 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {LoginEffect} from './store/effects/login.effect';
+import {RegisterComponent} from './components/register/register.component';
+import {RegisterEffect} from './store/effects/register.effect';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
@@ -21,10 +24,11 @@ const routes: Routes = [
     ReactiveFormsModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([
-      LoginEffect
+      LoginEffect,
+      RegisterEffect
     ]),
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   providers: [AuthService]
 })
 export class AuthModule {}
