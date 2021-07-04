@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {CurrentUserInterface} from '../../shared/types/currentUser.interface';
 import {RegisterRequestInterface} from '../types/registerRequest.interface';
+import {UserInterface} from '../../shared/types/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -23,5 +24,12 @@ export class AuthService {
 
     return this.http
       .post<CurrentUserInterface>(url, data);
+  }
+
+  getAll(): Observable<UserInterface[]> {
+    const url = environment.apiUrl + '/users';
+
+    return this.http
+      .get<UserInterface[]>(url);
   }
 }

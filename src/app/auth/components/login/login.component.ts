@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {loginAction} from '../../store/actions/login.action';
 import {isSubmittingSelector} from '../../store/selectors';
 import {AppStateInterface} from '../../../shared/types/appState.interface';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'o-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   // @ts-ignore
   isSubmitting$: Observable<boolean>;
 
-  constructor(private fb: FormBuilder, private store: Store<AppStateInterface>) { }
+  constructor(private fb: FormBuilder, private store: Store<AppStateInterface>, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -41,5 +42,12 @@ export class LoginComponent implements OnInit {
     const request: LoginRequestInterface = this.form.value;
 
     this.store.dispatch(loginAction({ request }));
+  }
+
+  getAllUsers(): void {
+    this.authService.getAll()
+      .subscribe((users) => {
+        console.log(users);
+      });
   }
 }

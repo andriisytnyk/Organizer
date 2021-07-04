@@ -11,6 +11,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {LoginEffect} from './store/effects/login.effect';
 import {RegisterComponent} from './components/register/register.component';
 import {RegisterEffect} from './store/effects/register.effect';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,6 @@ const routes: Routes = [
     ]),
   ],
   declarations: [LoginComponent, RegisterComponent],
-  providers: [AuthService]
+  providers: [AuthService, PersistenceService]
 })
 export class AuthModule {}

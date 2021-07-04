@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {CurrentUserInterface} from '../../../shared/types/currentUser.interface';
 import {HttpErrorResponse} from '@angular/common/http';
 import {registerAction, registerFailureAction, registerSuccessAction} from '../actions/register.action';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 @Injectable()
 export class RegisterEffect {
@@ -16,7 +17,7 @@ export class RegisterEffect {
       switchMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            // this.persistenceService.set('accessToken', loginResponse.token);
+            this.persistenceService.set('accessToken', currentUser.jwtToken);
             return registerSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
@@ -43,7 +44,7 @@ export class RegisterEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    // private persistenceService: PersistenceService,
+    private persistenceService: PersistenceService,
     private router: Router
   ) {}
 }
