@@ -17,7 +17,6 @@ export class LoginEffect {
       switchMap(({ request }) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            console.log(currentUser.jwtToken);
             this.persistenceService.set('accessToken', currentUser.jwtToken);
             return loginSuccessAction({ currentUser });
           }),
