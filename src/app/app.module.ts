@@ -12,6 +12,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {PersistenceService} from './shared/services/persistence.service';
 import {AuthInterceptor} from './shared/services/authInterceptor.service';
+import {CalendarModule} from './shared/modules/calendar/calendar.module';
+import {OrganizerModule} from './organizer/organizer.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import {AuthInterceptor} from './shared/services/authInterceptor.service';
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot(),
+    OrganizerModule,
+    CalendarModule
   ],
   providers: [
     PersistenceService,
